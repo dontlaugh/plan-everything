@@ -1,0 +1,59 @@
+base_dir = "/home/cmcfarland/Code/terraforming/projects"
+output_dir = "/home/cmcfarland/plan-everything"
+
+[[plan]]
+dir = "experiments"
+profile = "v1_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], staging = ["-var-file", "staging.tfvars"], earth = ["-var-file", "earth.tfvars"] }
+
+[[plan]]
+dir = "furl"
+profile = "infra_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], mars = ["-var-file", "mars.tfvars"], development = ["-var-file", "development.tfvars"] }
+
+[[plan]]
+dir = "pages"
+profile = "infra_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], mars = ["-var-file", "mars.tfvars"], development = ["-var-file", "development.tfvars"] }
+
+[[plan]]
+dir = "events"
+profile = "infra_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], mars = ["-var-file", "mars.tfvars"], development = ["-var-file", "development.tfvars"] }
+
+[[plan]]
+dir = "assets"
+profile = "infra_power_user"
+# NOTE: we are using development varfile for mars?
+workspace_flags = { production = ["-var-file", "production.tfvars"], development = ["-var-file", "development.tfvars"] }
+
+[[plan]]
+dir = "pricegun"
+profile = "v1_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], staging = ["-var-file", "staging.tfvars"] }
+
+[[plan]]
+dir = "identity"
+profile = "infra_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], development = ["-var-file", "development.tfvars"] }
+
+[[plan]]
+dir = "entitlements"
+profile = "infra_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], mars = ["-var-file", "mars.tfvars"], development = ["-var-file", "development.tfvars"] }
+
+[[plan]]
+dir = "grafana"
+profile = "infra_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], development = ["-var-file", "development.tfvars"] }
+
+[[plan]]
+dir = "vibes"
+profile = "infra_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], development = ["-var-file", "development.tfvars"], mars = ["-var-file", "mars.tfvars"] }
+
+[[plan]]
+dir = "terraboard"
+profile = "infra_power_user"
+workspace_flags = { production = ["-var-file", "production.tfvars"], development = ["-var-file", "development.tfvars"] }
+
