@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -8,16 +9,19 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/BurntSushi/toml"
+	"gopkg.in/yaml.v2"
 )
 
+var config = flag.String("config", "config.yml", "path to config file")
+
 func main() {
-	data, err := ioutil.ReadFile("config.toml")
+	flag.Parse()
+	data, err := ioutil.ReadFile(*config)
 	if err != nil {
 		log.Fatal(err)
 	}
 	var conf Config
-	err = toml.Unmarshal(data, &conf)
+	err = yaml.Unmarshal(data, &conf)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -48,15 +52,15 @@ func run(conf Config) error {
 }
 
 type Config struct {
-	BaseDir   string       `toml:"base_dir"`
-	OutputDir string       `toml:"output_dir"`
-	Plans     []PlanConfig `toml:"plan"`
+	BaseDir   string       `toml:"base_dir" yaml:"base_dir"`
+	OutputDir string       `toml:"output_dir" yaml:"output_dir"`
+	Plans     []PlanConfig `toml:"plan" yaml:"plans"`
 }
 
 type PlanConfig struct {
-	Dir            string              `toml:"dir"`
-	Profile        string              `toml:"profile"`
-	WorkspaceFlags map[string][]string `toml:"workspace_flags"`
+	Dir            string              `toml:"dir" yaml:"dir"`
+	Profile        string              `toml:"profile" yaml:"profile"`
+	WorkspaceFlags map[string][]string `toml:"workspace_flags" yaml:"workspace_flags"`
 }
 
 func terraformPlan(projectName, dir, profile, outputDir, workspace string, flags []string) error {

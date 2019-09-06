@@ -1,2 +1,8 @@
 #ignore the binary
 plan-everything
+
+# ignore configs
+*.yaml
+*.yml
+*.toml
+
