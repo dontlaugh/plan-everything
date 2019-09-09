@@ -71,8 +71,8 @@ func terraformPlan(projectName, dir, profile, outputDir, workspace string, flags
 	cmd.Env = append(os.Environ(), fmt.Sprintf("AWS_PROFILE=%s", profile))
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		fmt.Println(string(output))
-		return err
+		log.Printf("error while planning: terraform %v", args)
+		// NOTE: we keep going even if there's an error in the plan
 	}
 	os.MkdirAll(filepath.Join(outputDir, projectName), 0755)
 	planFile := filepath.Join(outputDir, projectName, workspace)
