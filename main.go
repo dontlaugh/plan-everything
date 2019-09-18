@@ -93,3 +93,11 @@ func workspaceSelect(dir, workspace string) error {
 	}
 	return nil
 }
+
+
+/*
+Terraform plan exit codes:
+0 = Succeeded with empty diff (no changes)
+1 = Error
+2 = Succeeded with non-empty diff (changes present)
+*/
