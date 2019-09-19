@@ -5,4 +5,5 @@ plan-everything
 *.yaml
 *.yml
 *.toml
-
+*.txt
+*.sh
