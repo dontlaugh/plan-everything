@@ -71,7 +71,17 @@ func terraformPlan(projectName, dir, profile, outputDir, workspace string, flags
 	cmd.Env = append(os.Environ(), fmt.Sprintf("AWS_PROFILE=%s", profile))
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		log.Printf("error while planning: terraform %v", args)
+		if exitError, ok := err.(*exec.ExitError); ok {
+			switch int(exitError.ExitCode()) {
+			case 1:
+				log.Printf("error while planning: terraform %v", args)
+			case 2:
+				log.Printf("plan succeeded with diff: terraform %v", args)
+			case 0:
+				// shouldn't happen, right?
+				log.Println("shouldn't happen")
+			}
+		}
 		// NOTE: we keep going even if there's an error in the plan
 	}
 	os.MkdirAll(filepath.Join(outputDir, projectName), 0755)
@@ -93,7 +103,6 @@ func workspaceSelect(dir, workspace string) error {
 	}
 	return nil
 }
-
 
 /*
 Terraform plan exit codes:
