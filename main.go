@@ -34,6 +34,7 @@ func run(conf Config) error {
 	if err := os.MkdirAll(conf.OutputDir, 0755); err != nil {
 		return err
 	}
+
 	for _, plan := range conf.Plans {
 		for workspace, flags := range plan.WorkspaceFlags {
 			dir := filepath.Join(conf.BaseDir, plan.Dir)
